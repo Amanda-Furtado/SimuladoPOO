@@ -1,0 +1,34 @@
+public class Produto {
+	public String nome;
+	private static double preco;
+	final int codigo;
+
+public Produto(String nome) {
+	codigo = "A100"; // atribuição de string em um int.
+	nome = nome; // deveria ser this.nome = nome, do modo que esta fica parâmetro = parâmetro.
+}
+
+public static void aplicarDesconto(double porcentagem) {
+	preco = preco - (preco * (porcentagem / 100));
+	System.out.println("Produto: " + nome); // método estático não pode acessar variavel de instância, já que ele não sabe a qual instância usar.
+}
+
+public void setCodigo(int novoCodigo) {
+	this.codigo = novoCodigo; // código é final, não pode receber uma nova atribuição.
+}
+
+public void getPreco() {
+	return preco; // não deveria retornar nada, pois é um método public void.
+}
+
+public static void main(String[] args) {
+	Produto p1 = new Produto("Teclado"); // o nome em si da instância não vai ser alterado, pelo que foi dito anteriormente lá no construtor.
+	p1.preco = 150.0;
+	p1.codigo = 500; // erro novamente, pois codigo é final.
+
+	double valor = p1.getPreco(); // void não pode ser convertido pra double.
+	System.out.println("Valor: " + valor); // não tem nenhum valor pra ser empreço.
+
+	Produto.aplicarDesconto(10); // vai aplicar, mas vai dar erro no print.
+}
+}
